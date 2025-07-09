@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: letter;
+        margin: 0;
+      }
+
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 300;
+        src: url('../fonts/Montserrat-Light.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* montserrat-regular - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../fonts/Montserrat-Regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* montserrat-600 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        src: url('../fonts/Montserrat-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+        margin: 0.25in;
+        padding: 0;
+        font-size: 10pt;
+        line-height: 12pt;
+        -webkit-print-color-adjust: exact !important;
+      }
+
+      #main {
+        width: 8in;
+        height: 10.5in;
+        border: solid 2pt black;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+      }
+
+      #header {
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.1in;
+      }
+
+      #title {
+        text-transform: uppercase;
+        font-size: 18pt;
+        font-weight: 600;
+      }
+
+      .form-field {
+        padding: 0.05in;
+        background: white;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        border-bottom: solid 0.5pt black;
+      }
+
+      #header .form-field {
+        width: 3in;
+        border: none;
+        height: 0.3in;
+        padding-top: 0;
+        padding-bottom: 0;
+        justify-content: center;
+      }
+
+      #body {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+        flex-grow: 1;
+      }
+
+      #meta {
+        width: 2.5in;
+        margin: 0.1in 0.15in 0.15in 0.1in;
+        border: solid 1pt black;
+        box-shadow: 0.05in 0.05in 0 black;
+        /* border-right: solid 2pt; */
+      }
+
+      #meta .form-field {
+        height: 0.5in;
+      }
+
+      #meta .form-field.note {
+        height: auto;
+        flex-grow: 1;
+        border: none;
+      }
+
+      #frames {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .frame-col {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border-left: solid 0.5pt black;
+      }
+
+      #frames .form-field {
+        flex-grow: 1;
+      }
+
+      #frames .form-field:last-child {
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header">
+        <div id="title">
+          Film Log
+        </div>
+        <div class="form-field">
+          Date
+        </div>
+      </div>
+      <div id="body">
+        <div id="meta">
+          {{ #metaFields }}
+          <div class="form-field">
+            {{ . }}
+          </div>
+          {{ /metaFields }}
+          <div class="form-field note">
+            Notes
+          </div>
+        </div>
+        <div id="frames">
+          {{ #frameColumns }}
+          <div class="frame-col">
+            {{ #. }}
+            <div class="form-field">
+              {{ . }}.
+            </div>
+            {{ /. }}
+          </div>
+          {{ /frameColumns }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
