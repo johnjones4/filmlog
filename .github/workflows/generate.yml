@@ -54,19 +54,10 @@ jobs:
       - name: Download fonts and generate outputs
         run: make all
 
-      - name: Create and push tag
-        id: tag
-        run: |
-          VERSION="v$(date +'%Y.%m.%d.%H%M')"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git tag $VERSION
-          git push origin $VERSION
-
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         with:
           files: out/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref_type == 'tag'
