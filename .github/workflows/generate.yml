@@ -64,29 +64,9 @@ jobs:
           git tag $VERSION
           git push origin $VERSION
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         with:
           files: out/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Release Tag
-        id: tag
-        run: |
-          # Use date-based version like vYYYY.MM.DD.HHMM
-          VERSION="v$(date +'%Y.%m.%d.%H%M')"
-          echo "release_tag=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Create Git Tag
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git tag ${{ steps.tag.outputs.release_tag }}
-          git push origin ${{ steps.tag.outputs.release_tag }}
