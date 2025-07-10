@@ -21,8 +21,10 @@ meta_fields = [
     'Film Stock',
     'Box Speed',
     'Exposed Speed',
+    'Camera/Lens',
     'Developer',
-    'Development Time/Temp'
+    'Developer Age',
+    'Development Time/Temp',
 ]
 
 def render_pdf_with_chrome(html_path, pdf_path):
